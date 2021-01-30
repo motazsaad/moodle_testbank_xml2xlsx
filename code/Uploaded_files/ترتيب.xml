@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$course$/top/الافتراضي لـ testbank/ترتيب</text>
+    </category>
+    <info format="html">
+      <text></text>
+    </info>
+  </question>
+
+<!-- question: 532333  -->
+  <question type="ordering">
+    <name>
+      <text>ترتيب</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p><span style="font-size: large;">رتب خطوات إنشاء ملف وورد على سطح المكتب</span></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>4.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <layouttype>VERTICAL</layouttype>
+    <selecttype>ALL</selecttype>
+    <selectcount>0</selectcount>
+    <gradingtype>ABSOLUTE_POSITION</gradingtype>
+    <showgrading>SHOW</showgrading>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>إجابتك صحيحة</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>إجابتك صحيحة بشكل جزئي</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>إجابتك غير صحيحة.</p>]]></text>
+    </incorrectfeedback>
+    <answer fraction="1.0000000" format="moodle_auto_format">
+      <text>نضغط بالزر اليمين للفأرة على مكان فارغ في سطح المكتب</text>
+    </answer>
+    <answer fraction="2.0000000" format="moodle_auto_format">
+      <text>نختار  خيار جديد</text>
+    </answer>
+    <answer fraction="3.0000000" format="moodle_auto_format">
+      <text>نختار خيار مستند microsoft word</text>
+    </answer>
+    <answer fraction="4.0000000" format="moodle_auto_format">
+      <text>نسمي الملف</text>
+    </answer>
+  </question>
+
+<question type="ordering">
+    <name>
+      <text>ترتيب</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p><span style="font-size: large;">خطوات عمل الشاي </span></p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text></text>
+    </generalfeedback>
+    <defaultgrade>4.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <idnumber></idnumber>
+    <layouttype>VERTICAL</layouttype>
+    <selecttype>ALL</selecttype>
+    <selectcount>0</selectcount>
+    <gradingtype>ABSOLUTE_POSITION</gradingtype>
+    <showgrading>SHOW</showgrading>
+    <correctfeedback format="html">
+      <text><![CDATA[<p>إجابتك صحيحة</p>]]></text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text><![CDATA[<p>إجابتك صحيحة بشكل جزئي</p>]]></text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text><![CDATA[<p>إجابتك غير صحيحة.</p>]]></text>
+    </incorrectfeedback>
+    <answer fraction="1.0000000" format="moodle_auto_format">
+      <text>اغلي المي</text>
+    </answer>
+    <answer fraction="2.0000000" format="moodle_auto_format">
+      <text>صب المي</text>
+    </answer>
+    <answer fraction="3.0000000" format="moodle_auto_format">
+      <text>حط سكر</text>
+    </answer>
+    <answer fraction="4.0000000" format="moodle_auto_format">
+      <text>حط نعنع</text>
+    </answer>
+	<answer fraction="5.0000000" format="moodle_auto_format">
+      <text>صب بالكاسة</text>
+    </answer>
+	<answer fraction="6.0000000" format="moodle_auto_format">
+      <text>إشرب يا كبير</text>
+    </answer>
+  </question>
+</quiz>

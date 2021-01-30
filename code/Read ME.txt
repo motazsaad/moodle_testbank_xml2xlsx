@@ -1,0 +1,6 @@
+/*
+- The function of this program is to convert XML files in moodle platform format into excel.
+- Islamic University - Gaza.
+- Developed by: Abd Alaziz M. Alswasis.
+- @2021-2022
+*/
