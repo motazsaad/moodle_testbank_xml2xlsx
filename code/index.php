@@ -15,8 +15,9 @@
     <option value="True-Flase">True or Flase</option>
     <option value="Multi-choice">Multi-choice</option>
     <option value="Matching">Matching</option>
+	<option value="Random-Matching">Random-Matching</option>
     <option value="Order">Order</option>
-    <option value="Exam">Exam</option>
+    <option value="Exam">All</option>
   </select>
   <br><br>
 <input type="file" name="my_file"/><br/><br/>
@@ -48,51 +49,67 @@ $objPHPExcel->getActiveSheet()->setTitle('exam info');
 $objPHPExcel->setActiveSheetIndex(0);
 
 if (($typeQuestion == "True-Flase")){
-//Set the first row as the header row
+//Set the first row as the header rows
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', 'Answer');
+							  ->setCellValue('B1', 'Category')
+							  ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'Answer');
 convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase");
 }else if($typeQuestion == "Multi-choice"){
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', 'A1')
-							  ->setCellValue('D1', 'A2')
-							  ->setCellValue('E1', 'A3')
-							  ->setCellValue('F1', 'A4')
-							  ->setCellValue('G1', 'Answer');
+                              ->setCellValue('B1', 'Category')
+                              ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'A1')
+							  ->setCellValue('F1', 'A2')
+							  ->setCellValue('G1', 'A3')
+							  ->setCellValue('H1', 'A4')
+							  ->setCellValue('I1', 'Answer');
 convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice");
 }else if($typeQuestion == "Matching"){
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', 'True Answer')
-							  ->setCellValue('D1', 'All Answer');
+                              ->setCellValue('B1', 'Category')
+                              ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'True Answer')
+							  ->setCellValue('F1', 'All Answer');
 							  //->setCellValue('E1', 'A3')
 							  //->setCellValue('F1', 'A4');
 							  //->setCellValue('C1', 'answer');
 convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching");
+}else if($typeQuestion == "Random-Matching"){
+//Set the first row as the header row
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
+                              ->setCellValue('B1', 'Category')
+							  ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'Answer');
+convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching");
 }else if($typeQuestion == "Order"){
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', '1')
-							  ->setCellValue('D1', '2')
-							  ->setCellValue('E1', '3')
-							  ->setCellValue('F1', '4')
-							  ->setCellValue('G1', '5')
-							  ->setCellValue('H1', '6')
-							  ->setCellValue('I1', '7')
-							  ->setCellValue('J1', '8')
-							  ->setCellValue('K1', '9')
-							  ->setCellValue('L1', '10');
+                              ->setCellValue('B1', 'Category')
+                              ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', '1')
+							  ->setCellValue('F1', '2')
+							  ->setCellValue('G1', '3')
+							  ->setCellValue('H1', '4')
+							  ->setCellValue('I1', '5')
+							  ->setCellValue('J1', '6')
+							  ->setCellValue('K1', '7')
+							  ->setCellValue('L1', '8')
+							  ->setCellValue('M1', '9')
+							  ->setCellValue('N1', '10');
 convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order");
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }else if($typeQuestion == "Exam"){
 
 	//$qTypeIndex = 0
-	for ($qTypeIndex = 1; $qTypeIndex <= 4; $qTypeIndex++) {
+	for ($qTypeIndex = 1; $qTypeIndex <= 5; $qTypeIndex++) {
 	if ($qTypeIndex == 1){
 		////////////////////////////////////////////////////////////////////
 	echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> True-Flase";
@@ -104,8 +121,10 @@ convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order");
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', 'Answer');
+							  ->setCellValue('B1', 'Category')
+							  ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'Answer');
 convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase");
 }else if($qTypeIndex == 2){
 	////////////////////////////////////////////////////////////////////
@@ -118,12 +137,14 @@ convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase");
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', 'A1')
-							  ->setCellValue('D1', 'A2')
-							  ->setCellValue('E1', 'A3')
-							  ->setCellValue('F1', 'A4')
-							  ->setCellValue('G1', 'Answer');
+                              ->setCellValue('B1', 'Category')
+                              ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'A1')
+							  ->setCellValue('F1', 'A2')
+							  ->setCellValue('G1', 'A3')
+							  ->setCellValue('H1', 'A4')
+							  ->setCellValue('I1', 'Answer');
 convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice");
 }else if($qTypeIndex == 3){
 	////////////////////////////////////////////////////////////////////
@@ -136,9 +157,11 @@ convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice");
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', 'True Answer')
-							  ->setCellValue('D1', 'All Answer');
+                              ->setCellValue('B1', 'Category')
+                              ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'True Answer')
+							  ->setCellValue('F1', 'All Answer');
 							  //->setCellValue('E1', 'A3')
 							  //->setCellValue('F1', 'A4');
 							  //->setCellValue('C1', 'answer');
@@ -154,18 +177,36 @@ convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching");
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Question')
-							  ->setCellValue('C1', '1')
-							  ->setCellValue('D1', '2')
-							  ->setCellValue('E1', '3')
-							  ->setCellValue('F1', '4')
-							  ->setCellValue('G1', '5')
-							  ->setCellValue('H1', '6')
-							  ->setCellValue('I1', '7')
-							  ->setCellValue('J1', '8')
-							  ->setCellValue('K1', '9')
-							  ->setCellValue('L1', '10');
+                              ->setCellValue('B1', 'Category')
+                              ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', '1')
+							  ->setCellValue('F1', '2')
+							  ->setCellValue('G1', '3')
+							  ->setCellValue('H1', '4')
+							  ->setCellValue('I1', '5')
+							  ->setCellValue('J1', '6')
+							  ->setCellValue('K1', '7')
+							  ->setCellValue('L1', '8')
+							  ->setCellValue('M1', '9')
+							  ->setCellValue('N1', '10');
 convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order");
+}else if ($qTypeIndex == 5){
+		////////////////////////////////////////////////////////////////////
+	echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> ShortAnswer";
+	$objPHPExcel = new PHPExcel();
+	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
+                                          ->setSize(12);
+	$objPHPExcel->getActiveSheet()->setTitle('exam info');
+	$objPHPExcel->setActiveSheetIndex(0);
+////////////////////////////////////////////////////////////////////
+//Set the first row as the header row
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
+                              ->setCellValue('B1', 'Category')
+							  ->setCellValue('C1', 'Name Question')
+							  ->setCellValue('D1', 'Question')
+							  ->setCellValue('E1', 'Answer');
+convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching");
 }
 	}
 }
@@ -176,6 +217,9 @@ convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order");
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function convertFileFromXmlToExcel_TrueFalse($pathFile,$objPHPExcel, $Qtypr){
+$categoryQuestion = [];
+$category = "";
+$mainArrayNameQuestion = []; 
 $mainArrayQuestion = [];
 $mainArrayAnswer = [];
 $index = 1;
@@ -187,19 +231,35 @@ $objDOM = new DOMDocument();
 //$objDOM->load("trueandfalse.xml");
 $objDOM->load($pathFile);
 //Find Tag element "quiz" and return the element to variable $quiz
-$question = $objDOM->getElementsByTagName("question");
+$quiz = $objDOM->getElementsByTagName("quiz");
+foreach ($quiz as $quiz_data) {
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+$question = $quiz_data->getElementsByTagName("question");
 //looping if tag config have more than one
 foreach ($question as $data) {
 	//print_r($question);
     $questiontext = $data->getAttribute('type');
 	//print_r($type_question);
 	if($questiontext == "truefalse"){
+		//////
+		$questiontext = $data->getElementsByTagName("name");
+		foreach ($questiontext as $text) {
+        //print_r($text->nodeValue);    
+		$str = $text->nodeValue;
+		//echo '>'.$str;
+		//$a = strip_tags($str);
+	    $mainArrayNameQuestion[] = trim($str);	
+		//echo '<br>';
+		}
+		////////////////////////////////////////////////////////////////////////
 		$questiontext = $data->getElementsByTagName("questiontext");
 		foreach ($questiontext as $text) {
         //print_r($text->nodeValue);    
 		$str = $text->nodeValue;
 		$a = strip_tags($str);
-	    $mainArrayQuestion[] = $a;	
+	    $mainArrayQuestion[] = trim($a);
+        $categoryQuestion[] = $category;
 		//echo '<br>';
 		}
 		/////////////////////////////////////////////////////////////////////////
@@ -212,13 +272,29 @@ foreach ($question as $data) {
 		//echo '<br>';
 		}
 		}
+	}else if($questiontext == "category"){
+		$questiontext = $data->getElementsByTagName("category");
+		foreach ($questiontext as $text) {
+		$str = $text->nodeValue;
+	    //$mainArrayNameQuestion[] = trim($str);	
+		//if (contains(trim($str),"TF")){
+			 $category = trim($str);
+			   //echo $str;
+			   //echo '<br>';
+		 //  }
 	}
+	}
+}
 }
 //var_dump($mainArrayQuestion);
 for($i=1; $i<=count($mainArrayQuestion); $i++){
+	$ans = isArabic($mainArrayQuestion[$i-1],$mainArrayAnswer[$i-1]);
+	//echo '>'.$ans;
 	$objPHPExcel->getActiveSheet()->setCellValue('A'.($i+1), $i)
-    							  ->setCellValue('B'.($i+1), $mainArrayQuestion[$i-1])
-						   	      ->setCellValue('C'.($i+1), $mainArrayAnswer[$i-1]);								  
+                               	  ->setCellValue('B'.($i+1), $categoryQuestion[$i-1])
+	                              ->setCellValue('C'.($i+1), $mainArrayNameQuestion[$i-1])
+    							  ->setCellValue('D'.($i+1), $mainArrayQuestion[$i-1])
+						   	      ->setCellValue('E'.($i+1), $ans);								  
 }
 //print_r($objPHPExcel);
 //////////////////////////////////////////////////////////////////
@@ -240,28 +316,47 @@ toDownloadCurrentFile($filename);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function convertFileFromXmlToExcel_MultiChoice($pathFile,$objPHPExcel, $Qtypr){
+$categoryQuestion = [];
+$category = "";
+$mainArrayNameQuestion = []; 
 $mainArrayQuestion = [];
 $mainArrayAnswer = array();
 $mainArrayTrueAnswer = [];
 $objDOM = new DOMDocument();
 $objDOM->load($pathFile);
 //Find Tag element "quiz" and return the element to variable $quiz
+$quiz = $objDOM->getElementsByTagName("quiz");
+foreach ($quiz as $quiz_data){
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 $question = $objDOM->getElementsByTagName("question");
 //looping if tag config have more than one
 $indexAnswerForQuestion = 0;
-foreach ($question as $data) {
+foreach ($question as $data){
 	//print_r($question);
     $questiontext = $data->getAttribute('type');
 	//print_r($type_question);
 	$index = 1;
 	//$TrueAnswer = "";
 	if($questiontext == "multichoice"){
+		//////
+		$questiontext = $data->getElementsByTagName("name");
+		foreach ($questiontext as $text) {
+        //print_r($text->nodeValue);    
+		$str = $text->nodeValue;
+		//echo '>'.$str;
+		//$a = strip_tags($str);
+	    $mainArrayNameQuestion[] = trim($str);	
+		//echo '<br>';
+		}
+		////////////////////////////////////////////////////////////////////////
 		$questiontext = $data->getElementsByTagName("questiontext");
 		foreach ($questiontext as $text) {
         //print_r($text->nodeValue);    
 		$str = $text->nodeValue;
 		$a = strip_tags($str);
-	    $mainArrayQuestion[] = $a;	
+	    $mainArrayQuestion[] = trim($a);
+        $categoryQuestion[] = $category;		
 		//echo '<br>';
 		}
 		/////////////////////////////////////////////////////////////////////////
@@ -270,7 +365,7 @@ foreach ($question as $data) {
 			$questiontext = $text->getAttribute('fraction');
 			$q = $text->nodeValue;
 		    $fq = strip_tags($q);
-			$mainArrayAnswer[$indexAnswerForQuestion][] = $fq;
+			$mainArrayAnswer[$indexAnswerForQuestion][] = trim($fq);
 			if($questiontext == "100"){
 				//print_r($text->nodeValue);
 				//print_r($index);
@@ -282,16 +377,31 @@ foreach ($question as $data) {
 				$index++;
 		}
 		$indexAnswerForQuestion++;
+	}else if($questiontext == "category"){
+		$questiontext = $data->getElementsByTagName("category");
+		foreach ($questiontext as $text) {
+		$str = $text->nodeValue;
+	    //$mainArrayNameQuestion[] = trim($str);	
+		//if (contains(trim($str),"MC")){
+			 $category = trim($str);
+			   //echo $str;
+			   //echo '<br>';
+		  // }
+	}
 	}
 }
+}
+error_reporting(E_ALL ^ E_NOTICE);
 for($i=1; $i<=count($mainArrayQuestion); $i++){
 	$objPHPExcel->getActiveSheet()->setCellValue('A'.($i+1), $i)
-    							  ->setCellValue('B'.($i+1), $mainArrayQuestion[$i-1])
-						   	      ->setCellValue('C'.($i+1), $mainArrayAnswer[$i-1][0])
-							      ->setCellValue('D'.($i+1), $mainArrayAnswer[$i-1][1])
-							      ->setCellValue('E'.($i+1), $mainArrayAnswer[$i-1][2])
-							      ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1][3])
-							      ->setCellValue('G'.($i+1), $mainArrayTrueAnswer[$i-1]);								  
+	                              ->setCellValue('B'.($i+1), $categoryQuestion[$i-1])
+    							  ->setCellValue('C'.($i+1), $mainArrayNameQuestion[$i-1])
+								  ->setCellValue('D'.($i+1), $mainArrayQuestion[$i-1])
+						   	      ->setCellValue('E'.($i+1), $mainArrayAnswer[$i-1][0])
+							      ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1][1])
+							      ->setCellValue('G'.($i+1), $mainArrayAnswer[$i-1][2])
+							      ->setCellValue('H'.($i+1), $mainArrayAnswer[$i-1][3])
+							      ->setCellValue('I'.($i+1), $mainArrayTrueAnswer[$i-1]);								  
 }
 //////////////////////////////////////////////////////////////////
 if (count($mainArrayQuestion) > 0){
@@ -303,11 +413,19 @@ toDownloadCurrentFile($filename);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 function convertFileFromXmlToExcel_Matching($pathFile,$objPHPExcel, $Qtypr){
+$categoryQuestion = [];
+$category = "";
+$mainArrayNameQuestion = []; 
+$QName = "";
 $mainArrayQuestion = array();
 $mainArrayAnswer = [];
 $objDOM = new DOMDocument();
 $objDOM->load($pathFile);
 //Find Tag element "quiz" and return the element to variable $quiz
+$quiz = $objDOM->getElementsByTagName("quiz");
+foreach ($quiz as $quiz_data) {
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 $question = $objDOM->getElementsByTagName("question");
 //looping if tag config have more than one
 $indexAnswerForQuestion = 0;
@@ -318,6 +436,17 @@ foreach ($question as $data) {
 	//print_r($type_question);
 	//$TrueAnswer = "";
 	if($questiontext == "matching"){
+		//////
+		$questiontext2 = $data->getElementsByTagName("name");
+		foreach ($questiontext2 as $text2) {
+        //print_r($text->nodeValue);    
+		$str2 = $text2->nodeValue;
+		//echo '>'.$str;
+		//$a = strip_tags($str);
+		$QName = trim($str2);	
+	    //$mainArrayNameQuestion[] = trim($str2);	
+		}
+		////////////////////////////////////////////////////////////////////////
 		$itemCount = 0;
 		$questiontext = $data->getElementsByTagName("subquestion");
 		//print_r($questiontext->length);
@@ -331,8 +460,10 @@ foreach ($question as $data) {
 	    if ($q != ""){
 		//print_r($q);
 		//print_r($a);
-		$mainArrayQuestion[$index][0] = $q;		
-		$mainArrayQuestion[$index][1] = $a;
+		$mainArrayQuestion[$index][0] = trim($q);		
+		$mainArrayQuestion[$index][1] = trim($a);
+		$mainArrayNameQuestion[] = $QName;
+		$categoryQuestion[] = $category;
 		$index++;
 		$itemCount++;
 		}
@@ -350,17 +481,31 @@ foreach ($question as $data) {
 		}
 		
 		for($i=1; $i<=$itemCount; $i++){
-		$mainArrayAnswer[] = $allAnswer; 
+		$mainArrayAnswer[] = trim($allAnswer); 
 		}
 		
+	}else if($questiontext == "category"){
+		$questiontext = $data->getElementsByTagName("category");
+		foreach ($questiontext as $text) {
+		$str = $text->nodeValue;
+	    //$mainArrayNameQuestion[] = trim($str);	
+		//if (contains(trim($str),"MQ")){
+			 $category = trim($str);
+			   //echo $str;
+			   //echo '<br>';
+		  // }
 	}
+	}
+}
 }
 //print_r(count($mainArrayAnswer));
 for($i=1; $i<=$index; $i++){
 	$objPHPExcel->getActiveSheet()->setCellValue('A'.($i+1), $i)
-    							  ->setCellValue('B'.($i+1), $mainArrayQuestion[$i-1][0])
-							      ->setCellValue('C'.($i+1), $mainArrayQuestion[$i-1][1])
-								  ->setCellValue('D'.($i+1), $mainArrayAnswer[$i-1]);								  
+    							  ->setCellValue('B'.($i+1), $categoryQuestion[$i-1])
+								  ->setCellValue('C'.($i+1), $mainArrayNameQuestion[$i-1])
+								  ->setCellValue('D'.($i+1), $mainArrayQuestion[$i-1][0])
+							      ->setCellValue('E'.($i+1), $mainArrayQuestion[$i-1][1])
+								  ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1]);								  
 }
 //////////////////////////////////////////////////////////////////
 if (count($mainArrayQuestion) > 0){
@@ -372,13 +517,120 @@ toDownloadCurrentFile($filename);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function convertFileFromXmlToExcel_ShortAnswer($pathFile,$objPHPExcel, $Qtypr){
+$categoryQuestion = [];
+$category = "";
+$mainArrayNameQuestion = []; 
+$mainArrayQuestion = [];
+$mainArrayAnswer = [];
+$index = 1;
+//$xml=simplexml_load_file("trueandfalse.xml") or die("Error: Cannot create object");
+//print_r($xml);
+//echo $xml->question[0]->text;
+$objDOM = new DOMDocument();
+//Load xml file into DOMDocument variable
+//$objDOM->load("trueandfalse.xml");
+$objDOM->load($pathFile);
+//Find Tag element "quiz" and return the element to variable $quiz
+$quiz = $objDOM->getElementsByTagName("quiz");
+foreach ($quiz as $quiz_data){
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+$question = $objDOM->getElementsByTagName("question");
+//looping if tag config have more than one
+foreach ($question as $data) {
+	//print_r($question);
+    $questiontext = $data->getAttribute('type');
+	//print_r($type_question);
+	if($questiontext == "shortanswer"){
+		//////
+		$questiontext = $data->getElementsByTagName("name");
+		foreach ($questiontext as $text) {
+        //print_r($text->nodeValue);    
+		$str = $text->nodeValue;
+		//echo '>'.$str;
+		//$a = strip_tags($str);
+	    $mainArrayNameQuestion[] = trim($str);	
+		//echo '<br>';
+		}
+		////////////////////////////////////////////////////////////////////////
+		$questiontext = $data->getElementsByTagName("questiontext");
+		foreach ($questiontext as $text) {
+        //print_r($text->nodeValue);    
+		$str = $text->nodeValue;
+		$a = strip_tags($str);
+	    $mainArrayQuestion[] = trim($a);
+		$categoryQuestion[] = $category;
+		//echo '<br>';
+		}
+		/////////////////////////////////////////////////////////////////////////
+		$answer = $data->getElementsByTagName("answer");
+		foreach ($answer as $text) {
+			$questiontext = $text->getAttribute('fraction');
+        if($questiontext == "100"){
+		//print_r($text->nodeValue); 
+	    $mainArrayAnswer[] = $text->nodeValue;			
+		//echo '<br>';
+		}
+		}
+	}else if($questiontext == "category"){
+		$questiontext = $data->getElementsByTagName("category");
+		foreach ($questiontext as $text) {
+		$str = $text->nodeValue;
+	    //$mainArrayNameQuestion[] = trim($str);	
+		//if (contains(trim($str),"")){
+			 $category = trim($str);
+			   //echo $str;
+			   //echo '<br>';
+		 //  }
+	}
+	}
+}
+}
+//var_dump($mainArrayQuestion);
+for($i=1; $i<=count($mainArrayQuestion); $i++){
+	$ans = trim($mainArrayAnswer[$i-1]);
+	$objPHPExcel->getActiveSheet()->setCellValue('A'.($i+1), $i)
+	                              ->setCellValue('B'.($i+1), $categoryQuestion[$i-1])
+	                              ->setCellValue('C'.($i+1), $mainArrayNameQuestion[$i-1])
+    							  ->setCellValue('D'.($i+1), $mainArrayQuestion[$i-1])
+						   	      ->setCellValue('E'.($i+1), $ans);								  
+}
+//print_r($objPHPExcel);
+//////////////////////////////////////////////////////////////////
+//print_r($objPHPExcel);
+//Dynamic name, the combination of date and time
+if (count($mainArrayQuestion) > 0){
+$filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+$objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
+toDownloadCurrentFile($filename);
+}
+//header("Content-type: application/xlsx");
+//header("Content-Disposition: attachment;filename= Converted_files/".$filename);
+//toDownloadCurrentFile(str_replace('.php', '.xlsx', "Converted_files/".$filename));
+//header('Content-type: application/vnd.ms-excel');
+//header('Content-Disposition: attachment; filename='.$filename);
+//$objWriter->save("php://output");
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function convertFileFromXmlToExcel_Order($pathFile,$objPHPExcel, $Qtypr){
+$categoryQuestion = [];
+$category = "";
+$mainArrayNameQuestion = []; 
 $mainArrayQuestion = [];
 $mainArrayAnswer = array();
 $mainArrayTrueAnswer = [];
 $objDOM = new DOMDocument();
 $objDOM->load($pathFile);
 //Find Tag element "quiz" and return the element to variable $quiz
+$quiz = $objDOM->getElementsByTagName("quiz");
+foreach ($quiz as $quiz_data){
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 $question = $objDOM->getElementsByTagName("question");
 //looping if tag config have more than one
 $indexAnswerForQuestion = 0;
@@ -389,12 +641,24 @@ foreach ($question as $data) {
 	$index = 1;
 	//$TrueAnswer = "";
 	if($questiontext == "ordering"){
+		//////
+		$questiontext = $data->getElementsByTagName("name");
+		foreach ($questiontext as $text) {
+        //print_r($text->nodeValue);    
+		$str = $text->nodeValue;
+		//echo '>'.$str;
+		//$a = strip_tags($str);
+	    $mainArrayNameQuestion[] = trim($str);	
+		//echo '<br>';
+		}
+		////////////////////////////////////////////////////////////////////////
 		$questiontext = $data->getElementsByTagName("questiontext");
 		foreach ($questiontext as $text) {
         //print_r($text->nodeValue);    
 		$str = $text->nodeValue;
 		$a = strip_tags($str);
-	    $mainArrayQuestion[] = $a;	
+	    $mainArrayQuestion[] = trim($a);	
+		$categoryQuestion[] = $category;
 		//echo '<br>';
 		}
 		/////////////////////////////////////////////////////////////////////////
@@ -404,27 +668,41 @@ foreach ($question as $data) {
 			$orderNumber = $text->getAttribute('fraction');
 			$valAnswer = $text->nodeValue;
 		    $fq = strip_tags($valAnswer);
-			$mainArrayAnswer[$indexAnswerForQuestion][] = $fq;
+			$mainArrayAnswer[$indexAnswerForQuestion][] = trim($fq);
 		}
 		$indexAnswerForQuestion++;
+	}else if($questiontext == "category"){
+		$questiontext = $data->getElementsByTagName("category");
+		foreach ($questiontext as $text) {
+		$str = $text->nodeValue;
+	    //$mainArrayNameQuestion[] = trim($str);	
+		//if (contains(trim($str),"TF")){
+			 $category = trim($str);
+			   //echo $str;
+			   //echo '<br>';
+		//   }
 	}
+	}
+}
 }
 // Report all errors except E_NOTICE   
 error_reporting(E_ALL ^ E_NOTICE);  
 for($i=1; $i<=count($mainArrayQuestion); $i++){
 	try {
 	$objPHPExcel->getActiveSheet()->setCellValue('A'.($i+1), $i)
-    							  ->setCellValue('B'.($i+1), $mainArrayQuestion[$i-1])
-						   	      ->setCellValue('C'.($i+1), $mainArrayAnswer[$i-1][0])
-							      ->setCellValue('D'.($i+1), $mainArrayAnswer[$i-1][1])
-							      ->setCellValue('E'.($i+1), $mainArrayAnswer[$i-1][2])
-							      ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1][3])
-							      ->setCellValue('G'.($i+1), $mainArrayAnswer[$i-1][4])
-								  ->setCellValue('H'.($i+1), $mainArrayAnswer[$i-1][5])
-								  ->setCellValue('I'.($i+1), $mainArrayAnswer[$i-1][6])
-								  ->setCellValue('J'.($i+1), $mainArrayAnswer[$i-1][7])
-								  ->setCellValue('K'.($i+1), $mainArrayAnswer[$i-1][8])
-								  ->setCellValue('L'.($i+1), $mainArrayAnswer[$i-1][9]);
+	                              ->setCellValue('B'.($i+1), $categoryQuestion[$i-1])
+	                              ->setCellValue('C'.($i+1), $mainArrayNameQuestion[$i-1])
+    							  ->setCellValue('D'.($i+1), $mainArrayQuestion[$i-1])
+						   	      ->setCellValue('E'.($i+1), $mainArrayAnswer[$i-1][0])
+							      ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1][1])
+							      ->setCellValue('G'.($i+1), $mainArrayAnswer[$i-1][2])
+							      ->setCellValue('H'.($i+1), $mainArrayAnswer[$i-1][3])
+							      ->setCellValue('I'.($i+1), $mainArrayAnswer[$i-1][4])
+								  ->setCellValue('J'.($i+1), $mainArrayAnswer[$i-1][5])
+								  ->setCellValue('K'.($i+1), $mainArrayAnswer[$i-1][6])
+								  ->setCellValue('L'.($i+1), $mainArrayAnswer[$i-1][7])
+								  ->setCellValue('M'.($i+1), $mainArrayAnswer[$i-1][8])
+								  ->setCellValue('N'.($i+1), $mainArrayAnswer[$i-1][9]);
 	}catch(Exception $e) {
 		echo 'Array out of bound...';
 		}
@@ -486,6 +764,26 @@ if(isset($_FILES['my_file'])){
          print_r($errors);
       }
    }
+   
+function isArabic($string ,$ans){
+	   $str = $string;
+	   if (preg_match('/[اأإء-ي]/ui', $str)) {
+		   if (strpos("true",trim($ans)) !== false){
+			   return "صح";
+		   }else{
+			   return "خطأ";
+		   }
+		} else {
+			return $str;
+		}
+}
+function contains($haystack, $needle, $caseSensitive = false) {
+    return $caseSensitive ?
+            (strpos($haystack, $needle) === FALSE ? FALSE : TRUE):
+            (stripos($haystack, $needle) === FALSE ? FALSE : TRUE);
+}
+	//echo "test>>".(strpos("true",trim("true")) !== false);
+	//echo ">>>".isArabic("      يشترط لصحة بيع المال عند اتحاد الجنس والعلة التقابض والحلول دون التماثل.","true");
 /*
 - The function of this program is to convert XML files in moodle platform format into excel.
 - Islamic University - Gaza.
