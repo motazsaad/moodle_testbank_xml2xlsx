@@ -753,8 +753,9 @@ if(isset($_FILES['my_file'])){
       }*/
       
       if(empty($errors)==true) {
-         move_uploaded_file($file_tmp,"Uploaded_files/".$file_name);
-		 $path = "Uploaded_files/".$file_name;
+         $resultName = substr($file_name, 0, 50)+"_"+date('d-m-Y_H-i-s');
+         move_uploaded_file($file_tmp,"Uploaded_files/".$resultName);
+		 $path = "Uploaded_files/".$resultName;
 		 if($selectOption != "--"){
 			 iniValue($selectOption, $path);
 		 }else{
