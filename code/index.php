@@ -30,7 +30,8 @@
 <?php
 /** Include PHPExcel */
 require_once("Classes/PHPExcel.php");
-
+deleteFilesAfter24Hours();
+$array_filename = array();
 //////////////////////////////////////////////////////////////////
 function iniValue($typeQuestion , $path){
 if(strlen($path) > 15){
@@ -55,7 +56,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('C1', 'Name Question')
 							  ->setCellValue('D1', 'Question')
 							  ->setCellValue('E1', 'Answer');
-convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase");
+convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Multi-choice"){
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
@@ -67,7 +68,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('G1', 'A3')
 							  ->setCellValue('H1', 'A4')
 							  ->setCellValue('I1', 'Answer');
-convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice");
+convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Matching"){
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
@@ -79,7 +80,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  //->setCellValue('E1', 'A3')
 							  //->setCellValue('F1', 'A4');
 							  //->setCellValue('C1', 'answer');
-convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching");
+convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Random-Matching"){
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
@@ -87,7 +88,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('C1', 'Name Question')
 							  ->setCellValue('D1', 'Question')
 							  ->setCellValue('E1', 'Answer');
-convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching");
+convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Order"){
 //Set the first row as the header row
 $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
@@ -104,7 +105,7 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('L1', '8')
 							  ->setCellValue('M1', '9')
 							  ->setCellValue('N1', '10');
-convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order");
+convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }else if($typeQuestion == "Exam"){
 
@@ -112,7 +113,7 @@ convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order");
 	for ($qTypeIndex = 1; $qTypeIndex <= 5; $qTypeIndex++) {
 	if ($qTypeIndex == 1){
 		////////////////////////////////////////////////////////////////////
-	echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> True-Flase";
+	//echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> True-Flase <br>";
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
@@ -125,10 +126,10 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('C1', 'Name Question')
 							  ->setCellValue('D1', 'Question')
 							  ->setCellValue('E1', 'Answer');
-convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase");
+convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase", "لا يوجد أسئلة صح وخطأ.");
 }else if($qTypeIndex == 2){
 	////////////////////////////////////////////////////////////////////
-    echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> Multi-choice";
+    //echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> Multi-choice <br>";
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
@@ -145,10 +146,10 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('G1', 'A3')
 							  ->setCellValue('H1', 'A4')
 							  ->setCellValue('I1', 'Answer');
-convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice");
+convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice", "لا يوجد أسئلة إختيار من متعدد.");
 }else if($qTypeIndex == 3){
 	////////////////////////////////////////////////////////////////////
-	echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> Matching";
+	//echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> Matching <br>";
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
@@ -165,10 +166,10 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  //->setCellValue('E1', 'A3')
 							  //->setCellValue('F1', 'A4');
 							  //->setCellValue('C1', 'answer');
-convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching");
+convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching", "لا يوجد اسئلة مصطلح.");
 }else if($qTypeIndex == 4){
 	////////////////////////////////////////////////////////////////////
-	echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> Order";
+	//echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> Order <br>";
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
@@ -190,10 +191,10 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('L1', '8')
 							  ->setCellValue('M1', '9')
 							  ->setCellValue('N1', '10');
-convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order");
+convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order", "لا يوجد أسئلة ترتيب.");
 }else if ($qTypeIndex == 5){
 		////////////////////////////////////////////////////////////////////
-	echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> ShortAnswer";
+	//echo $qTypeIndex."- >>>>>>>>>>>>>>>>>>>>>>> ShortAnswer <br>";
 	$objPHPExcel = new PHPExcel();
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
@@ -206,17 +207,23 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
 							  ->setCellValue('C1', 'Name Question')
 							  ->setCellValue('D1', 'Question')
 							  ->setCellValue('E1', 'Answer');
-convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching");
+convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching", "لا يوجد أسئلة مصطلح عشوائية.");
 }
 	}
 }
+////////////////////////////////////////////////////////////
+global $array_filename;
+if(count($array_filename) >0){
+	toDownloadCurrentFile("");
+}
+////////////////////////////////////////////////////////////
 }else {
 	echo "<h1 style='background-color:red;'>Please, Select the file to be converted...</h1>";	
 	}
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function convertFileFromXmlToExcel_TrueFalse($pathFile,$objPHPExcel, $Qtypr){
+function convertFileFromXmlToExcel_TrueFalse($pathFile,$objPHPExcel, $Qtypr,$ErrorMsg){
 $categoryQuestion = [];
 $category = "";
 $mainArrayNameQuestion = []; 
@@ -300,12 +307,28 @@ for($i=1; $i<=count($mainArrayQuestion); $i++){
 //////////////////////////////////////////////////////////////////
 //print_r($objPHPExcel);
 //Dynamic name, the combination of date and time
-if (count($mainArrayQuestion) > 0){
+/*if (count($mainArrayQuestion) > 0){
 $filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
 toDownloadCurrentFile($filename);
-}
+}*/
+////////////////////////////////////////////////////////////////////////////
+//echo count($mainArrayQuestion);
+if(count($mainArrayQuestion)<1){
+	errorTypeCategory($ErrorMsg);
+}else{
+	$filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
+    global $array_filename;
+	$array_filename[] = $filename;
+	/*toDownloadCurrentFile($filename);
+	if(file_exists("Converted_files/".$filename)){
+		//unlink("Converted_files/".$filename);
+		}*/
+	}
+/////////////////////////////////////////////////////////////////////////////
 //header("Content-type: application/xlsx");
 //header("Content-Disposition: attachment;filename= Converted_files/".$filename);
 //toDownloadCurrentFile(str_replace('.php', '.xlsx', "Converted_files/".$filename));
@@ -315,7 +338,7 @@ toDownloadCurrentFile($filename);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function convertFileFromXmlToExcel_MultiChoice($pathFile,$objPHPExcel, $Qtypr){
+function convertFileFromXmlToExcel_MultiChoice($pathFile,$objPHPExcel, $Qtypr,$ErrorMsg){
 $categoryQuestion = [];
 $category = "";
 $mainArrayNameQuestion = []; 
@@ -337,6 +360,7 @@ foreach ($question as $data){
     $questiontext = $data->getAttribute('type');
 	//print_r($type_question);
 	$index = 1;
+	$hasAnswer = false;
 	//$TrueAnswer = "";
 	if($questiontext == "multichoice"){
 		//////
@@ -371,10 +395,15 @@ foreach ($question as $data){
 				//print_r($index);
 				//$mainArrayAnswer[] = $text->nodeValue;
 				//$TrueAnswer = $TrueAnswer ." + ". $index;	
-				$mainArrayTrueAnswer[] = $index;				
+				$mainArrayTrueAnswer[] = $index;	
+                $hasAnswer = true;				
 				//echo '<br>';
+				//echo $fq.' >>> '.$index;
 				}
 				$index++;
+		}
+		if (!$hasAnswer){
+			$mainArrayTrueAnswer[] = -1;
 		}
 		$indexAnswerForQuestion++;
 	}else if($questiontext == "category"){
@@ -392,7 +421,9 @@ foreach ($question as $data){
 }
 }
 error_reporting(E_ALL ^ E_NOTICE);
+//echo count($mainArrayTrueAnswer);
 for($i=1; $i<=count($mainArrayQuestion); $i++){
+	try{
 	$objPHPExcel->getActiveSheet()->setCellValue('A'.($i+1), $i)
 	                              ->setCellValue('B'.($i+1), $categoryQuestion[$i-1])
     							  ->setCellValue('C'.($i+1), $mainArrayNameQuestion[$i-1])
@@ -401,18 +432,33 @@ for($i=1; $i<=count($mainArrayQuestion); $i++){
 							      ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1][1])
 							      ->setCellValue('G'.($i+1), $mainArrayAnswer[$i-1][2])
 							      ->setCellValue('H'.($i+1), $mainArrayAnswer[$i-1][3])
-							      ->setCellValue('I'.($i+1), $mainArrayTrueAnswer[$i-1]);								  
+							      ->setCellValue('I'.($i+1), $mainArrayTrueAnswer[$i-1]);
+	}catch(Exception $e) {
+		echo 'Error in number of element...';
+		}								  
 }
 //////////////////////////////////////////////////////////////////
-if (count($mainArrayQuestion) > 0){
+/*if (count($mainArrayQuestion) > 0){
 $filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
 toDownloadCurrentFile($filename);
-}
+}*/
+////////////////////////////////////////////////////////////////////////////
+//echo count($mainArrayQuestion);
+if(count($mainArrayQuestion)<1){
+	errorTypeCategory($ErrorMsg);
+}else{
+	$filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
+	global $array_filename;
+	$array_filename[] = $filename;
+	}
+/////////////////////////////////////////////////////////////////////////////
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
-function convertFileFromXmlToExcel_Matching($pathFile,$objPHPExcel, $Qtypr){
+function convertFileFromXmlToExcel_Matching($pathFile,$objPHPExcel, $Qtypr,$ErrorMsg){
 $categoryQuestion = [];
 $category = "";
 $mainArrayNameQuestion = []; 
@@ -508,18 +554,27 @@ for($i=1; $i<=$index; $i++){
 								  ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1]);								  
 }
 //////////////////////////////////////////////////////////////////
-if (count($mainArrayQuestion) > 0){
+/*if (count($mainArrayQuestion) > 0){
 $filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
 toDownloadCurrentFile($filename);
+}*/
+////////////////////////////////////////////////////////////////////////////
+//echo count($mainArrayQuestion);
+if(count($mainArrayQuestion)<1){
+	errorTypeCategory($ErrorMsg);
+}else{
+	$filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
+	global $array_filename;
+	$array_filename[] = $filename;
+	}
 }
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function convertFileFromXmlToExcel_ShortAnswer($pathFile,$objPHPExcel, $Qtypr){
+function convertFileFromXmlToExcel_ShortAnswer($pathFile,$objPHPExcel, $Qtypr,$ErrorMsg){
 $categoryQuestion = [];
 $category = "";
 $mainArrayNameQuestion = []; 
@@ -602,12 +657,24 @@ for($i=1; $i<=count($mainArrayQuestion); $i++){
 //////////////////////////////////////////////////////////////////
 //print_r($objPHPExcel);
 //Dynamic name, the combination of date and time
-if (count($mainArrayQuestion) > 0){
+/*if (count($mainArrayQuestion) > 0){
 $filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
 toDownloadCurrentFile($filename);
-}
+}*/
+////////////////////////////////////////////////////////////////////////////
+//echo count($mainArrayQuestion);
+if(count($mainArrayQuestion)<1){
+	errorTypeCategory($ErrorMsg);
+}else{
+	$filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
+	global $array_filename;
+	$array_filename[] = $filename;
+	}
+///////////////////////////////////////////////////////////////////////////
 //header("Content-type: application/xlsx");
 //header("Content-Disposition: attachment;filename= Converted_files/".$filename);
 //toDownloadCurrentFile(str_replace('.php', '.xlsx', "Converted_files/".$filename));
@@ -617,7 +684,7 @@ toDownloadCurrentFile($filename);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function convertFileFromXmlToExcel_Order($pathFile,$objPHPExcel, $Qtypr){
+function convertFileFromXmlToExcel_Order($pathFile,$objPHPExcel, $Qtypr,$ErrorMsg){
 $categoryQuestion = [];
 $category = "";
 $mainArrayNameQuestion = []; 
@@ -708,22 +775,84 @@ for($i=1; $i<=count($mainArrayQuestion); $i++){
 		}
 }
 //////////////////////////////////////////////////////////////////
-if (count($mainArrayQuestion) > 0){
+/*if (count($mainArrayQuestion) > 0){
 $filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
 toDownloadCurrentFile($filename);
-}
+}*/
+////////////////////////////////////////////////////////////////////////////
+//echo count($mainArrayQuestion);
+if(count($mainArrayQuestion)<1){
+	errorTypeCategory($ErrorMsg);
+}else{
+	$filename = date('d-m-Y_H-i-s').$Qtypr.".xlsx";
+	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+	$objWriter->save(str_replace('.php', '.xlsx', "Converted_files/".$filename));
+	global $array_filename;
+	$array_filename[] = $filename;
+	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
 function toDownloadCurrentFile($filename){
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+//echo "<br>";
+//echo '<a id="linkfiletoDownload'.$filename.'" href="Converted_files/'.$filename.'">>>> Click here to Download the file ('.$filename.').</a>';
+//echo "<br>";
 echo "<br>";
-echo '<a href="Converted_files/'.$filename.'">>>> Click here to open the file ('.$filename.').</a>';
+echo "<h1 style='background-color:green;'>تم تحويل الملف بنجاح.</h1>";
 echo "<br>";
-echo "<br>";
-echo "<h1 style='background-color:green;'>The file was successfully converted.</h1>";
-echo "<br>";
+//echo '<iframe style="display: none;" src="multiple_downfile.php?text='.$filename.'">/iframe>';
+global $array_filename;
+//echo $array_filename[0];
+//echo count($array_filename);
+///////////////////////////////////////////////////////ZIP FILEs;
+$fileZipName = date('d-m-Y_H-i-s');
+$files = $array_filename;
+$zipname = 'Converted_files/'.$fileZipName.'.zip';
+$zip = new ZipArchive;
+$zip->open($zipname, ZipArchive::CREATE);
+foreach ($files as $file) {
+  $zip->addFile("Converted_files/".$file);
+}
+$isend = $zip->close();
+//////////////////////////////////////////////////////////
+echo 'يتم الأن معالجة الملف الرجاء الإنتظار قليلاً... <br>';
+echo '<a id="linkfiletoDownload" href="'.$zipname.'">>>> Click here to Download the file ('.$zipname.').</a>';
+echo '<br> يتم الأن تنزيل الملف <br>';
+//////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*$linkNameis = "linkfiletoDownload".$filename;*/
+echo "
+<script type=\"text/javascript\">
+setTimeout(function(){
+document.getElementById('linkfiletoDownload').click();
+alert('تم تصدير الملف بنجاح');
+window.location.href = window.location.pathname;
+},3000);
+</script>
+";
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*$file = 'Converted_files/'.$filename;
+header('Content-Description: File Transfer');
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+header('Content-Disposition: attachment; filename='.basename($file));
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file));
+ob_clean();
+flush();
+readfile($file);
+exit();*/
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+function errorTypeCategory($ErrorMsg){
+	echo "<h1 style='background-color:red;'>".$ErrorMsg."</h1>";
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -753,10 +882,11 @@ if(isset($_FILES['my_file'])){
       }*/
       
       if(empty($errors)==true) {
-         $resultName = (string)(substr($file_name, 0, 30)."_".date('d-m-Y_H-i-s'));
+         /*$resultName = (string)(substr($file_name, 0, 30)."_".date('d-m-Y_H-i-s'));
 		 echo $resultName;
-         move_uploaded_file($file_tmp,"Uploaded_files/".$resultName);
-		 $path = "Uploaded_files/".$resultName;
+          move_uploaded_file($file_tmp,"Uploaded_files/".$resultName);
+		 $path = "Uploaded_files/".$resultName;*/
+		 $path = $file_tmp;
 		 if($selectOption != "--"){
 			 iniValue($selectOption, $path);
 		 }else{
@@ -766,7 +896,7 @@ if(isset($_FILES['my_file'])){
          print_r($errors);
       }
    }
-   
+///////////////////////////////////////////////////////////////////////////////////
 function isArabic($string ,$ans){
 	   $str = $string;
 	   if (preg_match('/[اأإء-ي]/ui', $str)) {
@@ -779,13 +909,34 @@ function isArabic($string ,$ans){
 			return $str;
 		}
 }
+///////////////////////////////////////////////////////////////////////////////////
 function contains($haystack, $needle, $caseSensitive = false) {
     return $caseSensitive ?
             (strpos($haystack, $needle) === FALSE ? FALSE : TRUE):
             (stripos($haystack, $needle) === FALSE ? FALSE : TRUE);
 }
-	//echo "test>>".(strpos("true",trim("true")) !== false);
-	//echo ">>>".isArabic("      يشترط لصحة بيع المال عند اتحاد الجنس والعلة التقابض والحلول دون التماثل.","true");
+/////////////////////////////////////////////////////////////////////////////////////
+function deleteFilesAfter24Hours(){
+	$path = 'Converted_files/';
+if ($handle = opendir($path)) {
+    while (false !== ($file = readdir($handle))) { 
+        $filelastmodified = filemtime($path . $file);
+        //24 hours in a day * 3600 seconds per hour
+		//24*3600
+		if(file_exists($path . $file) && $file != ".." && $file != "."){
+		//echo (time() - $filelastmodified).'>'.$path . $file."<br>";
+        if((time() - $filelastmodified) > 500){
+				//echo $path . $file;
+				unlink($path . $file);
+        }else{
+			//echo "no delete";
+		}
+	}
+    }
+    closedir($handle); 
+}
+}
+/////////////////////////////////////////////////////////////////////////////////////
 /*
 - The function of this program is to convert XML files in moodle platform format into excel.
 - Islamic University - Gaza.
