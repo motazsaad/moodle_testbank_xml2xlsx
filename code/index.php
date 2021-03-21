@@ -1,27 +1,30 @@
-<html>
+<html dir="rtl" lang="ar">
 <!--/*
 - The function of this program is to convert XML files in moodle platform format into excel.
 - Islamic University - Gaza.
 - Developed by: Abd Alaziz M. Alswasis.
 - @2021-2022
 */-->
+<head>
+<meta charset="utf-8">
+</head>
 <body>
 <center>
 <br/><br/>
+<center><h1>تحويل بنوك الأسئلة من ملفات XML الى Excel</h1></center>
 <form name="form" method="POST" action="" enctype="multipart/form-data" >
-  <label for="cars">Choose the type of question:</label>
+  <label for="cars">إختر نوع بنك الأسئلة:</label>
   <select name="type_question" id="cars">
     <option value="--">--</option>
-    <option value="True-Flase">True or Flase</option>
-    <option value="Multi-choice">Multi-choice</option>
-    <option value="Matching">Matching</option>
-	<option value="Random-Matching">Random-Matching</option>
-    <option value="Order">Order</option>
-    <option value="Exam">All</option>
+    <option value="Multi-choice">إختيار من متعدد</option>
+    <option value="Matching">مصطلح</option>
+	<option value="Random-Matching">مصطلح عشوائي</option>
+    <option value="Order">ترتيب</option>
+    <option value="Exam">جميع الأنواع</option>
   </select>
   <br><br>
 <input type="file" name="my_file"/><br/><br/>
-<input type="submit" name="submit" value="Upload"/>
+<input type="submit" name="submit" value="إرسال الملف"/>
 </form>
 </center>
 </body>
@@ -34,7 +37,8 @@ deleteFilesAfter24Hours();
 $array_filename = array();
 //////////////////////////////////////////////////////////////////
 function iniValue($typeQuestion , $path){
-if(strlen($path) > 15){
+//echo $path;
+if(strlen($path) > 5){
 	//echo "".strlen($path);
 	echo "<br>";
 //Create a P1HPExcel object
@@ -46,65 +50,68 @@ $objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
 
 //Rename the worksheet
 $objPHPExcel->getActiveSheet()->setTitle('exam info');
+// right-to-left worksheet
+$objPHPExcel->getActiveSheet()->setRightToLeft(true);
 //Set active worksheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
 
 if (($typeQuestion == "True-Flase")){
 //Set the first row as the header rows
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Category')
-							  ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+							  ->setCellValue('B1', 'تصنيف السؤال')
+							  ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'الإجابة');
 convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Multi-choice"){
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-                              ->setCellValue('B1', 'Category')
-                              ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'A1')
-							  ->setCellValue('F1', 'A2')
-							  ->setCellValue('G1', 'A3')
-							  ->setCellValue('H1', 'A4')
-							  ->setCellValue('I1', 'Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+                              ->setCellValue('B1', 'تصنيف السؤال')
+                              ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'إجابة 1')
+							  ->setCellValue('F1', 'إجابة 2')
+							  ->setCellValue('G1', 'إجابة 3')
+							  ->setCellValue('H1', 'إجابة 4')
+							  ->setCellValue('I1', 'رقم الإجابة الصحيحة')
+							  ->setCellValue('J1', 'عدم ترتيب الإجابات عشوائيا');
 convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Matching"){
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-                              ->setCellValue('B1', 'Category')
-                              ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'True Answer')
-							  ->setCellValue('F1', 'All Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+                              ->setCellValue('B1', 'تصنيف السؤال')
+                              ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'الإجابة الصحيحة')
+							  ->setCellValue('F1', 'الإجابات المتاحة');
 							  //->setCellValue('E1', 'A3')
 							  //->setCellValue('F1', 'A4');
 							  //->setCellValue('C1', 'answer');
 convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Random-Matching"){
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-                              ->setCellValue('B1', 'Category')
-							  ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+                              ->setCellValue('B1', 'تصنيف السؤال')
+							  ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'الإجابة');
 convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Order"){
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-                              ->setCellValue('B1', 'Category')
-                              ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', '1')
-							  ->setCellValue('F1', '2')
-							  ->setCellValue('G1', '3')
-							  ->setCellValue('H1', '4')
-							  ->setCellValue('I1', '5')
-							  ->setCellValue('J1', '6')
-							  ->setCellValue('K1', '7')
-							  ->setCellValue('L1', '8')
-							  ->setCellValue('M1', '9')
-							  ->setCellValue('N1', '10');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+                              ->setCellValue('B1', 'تصنيف السؤال')
+                              ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'الترتيب 1')
+							  ->setCellValue('F1', 'الترتيب 2')
+							  ->setCellValue('G1', 'الترتيب 3')
+							  ->setCellValue('H1', 'الترتيب 4')
+							  ->setCellValue('I1', 'الترتيب 5')
+							  ->setCellValue('J1', 'الترتيب 6')
+							  ->setCellValue('K1', 'الترتيب 7')
+							  ->setCellValue('L1', 'الترتيب 8')
+							  ->setCellValue('M1', 'الترتيب 9')
+							  ->setCellValue('N1', 'الترتيب 10');
 convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }else if($typeQuestion == "Exam"){
@@ -118,14 +125,16 @@ convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order", "لقد قمت ب�
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
 	$objPHPExcel->getActiveSheet()->setTitle('exam info');
+	// right-to-left worksheet
+    $objPHPExcel->getActiveSheet()->setRightToLeft(true);
 	$objPHPExcel->setActiveSheetIndex(0);
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-							  ->setCellValue('B1', 'Category')
-							  ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+							  ->setCellValue('B1', 'تصنيف السؤال')
+							  ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'الإجابة');
 convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase", "لا يوجد أسئلة صح وخطأ.");
 }else if($qTypeIndex == 2){
 	////////////////////////////////////////////////////////////////////
@@ -134,18 +143,20 @@ convertFileFromXmlToExcel_TrueFalse($path, $objPHPExcel, "TrueFlase", "لا يو
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
 	$objPHPExcel->getActiveSheet()->setTitle('exam info');
+	$objPHPExcel->getActiveSheet()->setRightToLeft(true);
 	$objPHPExcel->setActiveSheetIndex(0);
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-                              ->setCellValue('B1', 'Category')
-                              ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'A1')
-							  ->setCellValue('F1', 'A2')
-							  ->setCellValue('G1', 'A3')
-							  ->setCellValue('H1', 'A4')
-							  ->setCellValue('I1', 'Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+                              ->setCellValue('B1', 'تصنيف السؤال')
+                              ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'إجابة 1')
+							  ->setCellValue('F1', 'إجابة 2')
+							  ->setCellValue('G1', 'إجابة 3')
+							  ->setCellValue('H1', 'إجابة 4')
+							  ->setCellValue('I1', 'رقم الإجابة الصحيحة')
+							  ->setCellValue('J1', 'عدم ترتيب الإجابات عشوائيا');
 convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice", "لا يوجد أسئلة إختيار من متعدد.");
 }else if($qTypeIndex == 3){
 	////////////////////////////////////////////////////////////////////
@@ -154,15 +165,16 @@ convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice", "لا 
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
 	$objPHPExcel->getActiveSheet()->setTitle('exam info');
+	$objPHPExcel->getActiveSheet()->setRightToLeft(true);
 	$objPHPExcel->setActiveSheetIndex(0);
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-                              ->setCellValue('B1', 'Category')
-                              ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'True Answer')
-							  ->setCellValue('F1', 'All Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+                              ->setCellValue('B1', 'تصنيف السؤال')
+                              ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'الإجابة الصحيحة')
+							  ->setCellValue('F1', 'الإجابات المتاحة');
 							  //->setCellValue('E1', 'A3')
 							  //->setCellValue('F1', 'A4');
 							  //->setCellValue('C1', 'answer');
@@ -174,6 +186,7 @@ convertFileFromXmlToExcel_Matching($path, $objPHPExcel, "Matching", "لا يوج
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
 	$objPHPExcel->getActiveSheet()->setTitle('exam info');
+	$objPHPExcel->getActiveSheet()->setRightToLeft(true);
 	$objPHPExcel->setActiveSheetIndex(0);
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
@@ -199,14 +212,15 @@ convertFileFromXmlToExcel_Order($path, $objPHPExcel, "Order", "لا يوجد أ�
 	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial')
                                           ->setSize(12);
 	$objPHPExcel->getActiveSheet()->setTitle('exam info');
+	$objPHPExcel->getActiveSheet()->setRightToLeft(true);
 	$objPHPExcel->setActiveSheetIndex(0);
 ////////////////////////////////////////////////////////////////////
 //Set the first row as the header row
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ID')
-                              ->setCellValue('B1', 'Category')
-							  ->setCellValue('C1', 'Name Question')
-							  ->setCellValue('D1', 'Question')
-							  ->setCellValue('E1', 'Answer');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
+                              ->setCellValue('B1', 'تصنيف السؤال')
+							  ->setCellValue('C1', 'اسم السؤال')
+							  ->setCellValue('D1', 'السؤال')
+							  ->setCellValue('E1', 'الإجابة');
 convertFileFromXmlToExcel_ShortAnswer($path, $objPHPExcel, "Random-Matching", "لا يوجد أسئلة مصطلح عشوائية.");
 }
 	}
@@ -283,6 +297,7 @@ foreach ($question as $data) {
 		$questiontext = $data->getElementsByTagName("category");
 		foreach ($questiontext as $text) {
 		$str = $text->nodeValue;
+		$str = str_ireplace('$course$/top/','',$str);
 	    //$mainArrayNameQuestion[] = trim($str);	
 		//if (contains(trim($str),"TF")){
 			 $category = trim($str);
@@ -410,6 +425,7 @@ foreach ($question as $data){
 		$questiontext = $data->getElementsByTagName("category");
 		foreach ($questiontext as $text) {
 		$str = $text->nodeValue;
+		$str = str_ireplace('$course$/top/','',$str);
 	    //$mainArrayNameQuestion[] = trim($str);	
 		//if (contains(trim($str),"MC")){
 			 $category = trim($str);
@@ -522,7 +538,7 @@ foreach ($question as $data) {
 			//$questiontext = $text->getAttribute('fraction');
 			$q = $text->nodeValue;
 		    $fq = strip_tags($q);
-			$allAnswer = $allAnswer.",".$fq; 
+			$allAnswer = trim($fq).", ".trim($allAnswer); 
 			//$mainArrayAnswer[] = $fq;
 		}
 		
@@ -534,6 +550,7 @@ foreach ($question as $data) {
 		$questiontext = $data->getElementsByTagName("category");
 		foreach ($questiontext as $text) {
 		$str = $text->nodeValue;
+		$str = str_ireplace('$course$/top/','',$str);
 	    //$mainArrayNameQuestion[] = trim($str);	
 		//if (contains(trim($str),"MQ")){
 			 $category = trim($str);
@@ -634,6 +651,7 @@ foreach ($question as $data) {
 		$questiontext = $data->getElementsByTagName("category");
 		foreach ($questiontext as $text) {
 		$str = $text->nodeValue;
+		$str = str_ireplace('$course$/top/','',$str);
 	    //$mainArrayNameQuestion[] = trim($str);	
 		//if (contains(trim($str),"")){
 			 $category = trim($str);
@@ -742,6 +760,7 @@ foreach ($question as $data) {
 		$questiontext = $data->getElementsByTagName("category");
 		foreach ($questiontext as $text) {
 		$str = $text->nodeValue;
+		$str = str_ireplace('$course$/top/','',$str);
 	    //$mainArrayNameQuestion[] = trim($str);	
 		//if (contains(trim($str),"TF")){
 			 $category = trim($str);
@@ -872,9 +891,9 @@ if(isset($_FILES['my_file'])){
       if($file_type == $extensions){
          $errors = "extension not allowed, please choose a xml or MXL file.";
       }else{
-		  echo '<li>File Name: '.$file_name.'</li>';
-		  echo '<li>File Size: '.$file_size.'</li>';
-		  echo '<li>File Type: '.$file_type.'</li>';
+		  echo '<li>إسم الملف: '.$file_name.'</li>';
+		  echo '<li>حجم الملف: '.$file_size.'</li>';
+		  echo '<li>نوع الملف: '.$file_type.'</li>';
 	  }
       
       /*if($file_size > 2097152) {
