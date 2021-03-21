@@ -16,6 +16,7 @@
   <label for="cars">إختر نوع بنك الأسئلة:</label>
   <select name="type_question" id="cars">
     <option value="--">--</option>
+    <option value="True-Flase">صح او خطأ</option>
     <option value="Multi-choice">إختيار من متعدد</option>
     <option value="Matching">مصطلح</option>
 	<option value="Random-Matching">مصطلح عشوائي</option>
