@@ -74,8 +74,9 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
 							  ->setCellValue('F1', 'إجابة 2')
 							  ->setCellValue('G1', 'إجابة 3')
 							  ->setCellValue('H1', 'إجابة 4')
-							  ->setCellValue('I1', 'رقم الإجابة الصحيحة')
-							  ->setCellValue('J1', 'عدم ترتيب الإجابات عشوائيا');
+							  ->setCellValue('I1', 'إجابة 5')
+							  ->setCellValue('J1', 'رقم الإجابة الصحيحة')
+							  ->setCellValue('K1', 'عدم ترتيب الإجابات عشوائيا');
 convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice", "لقد قمت بإختيار نوع تصنيف خاطئ يرجى المحاولة مرة اخرى.");
 }else if($typeQuestion == "Matching"){
 //Set the first row as the header row
@@ -156,8 +157,9 @@ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'ترقيم السؤال')
 							  ->setCellValue('F1', 'إجابة 2')
 							  ->setCellValue('G1', 'إجابة 3')
 							  ->setCellValue('H1', 'إجابة 4')
-							  ->setCellValue('I1', 'رقم الإجابة الصحيحة')
-							  ->setCellValue('J1', 'عدم ترتيب الإجابات عشوائيا');
+							  ->setCellValue('I1', 'إجابة 5')
+							  ->setCellValue('J1', 'رقم الإجابة الصحيحة')
+							  ->setCellValue('K1', 'عدم ترتيب الإجابات عشوائيا');
 convertFileFromXmlToExcel_MultiChoice($path, $objPHPExcel, "Multichoice", "لا يوجد أسئلة إختيار من متعدد.");
 }else if($qTypeIndex == 3){
 	////////////////////////////////////////////////////////////////////
@@ -466,8 +468,9 @@ for($i=1; $i<=count($mainArrayQuestion); $i++){
 							      ->setCellValue('F'.($i+1), $mainArrayAnswer[$i-1][1])
 							      ->setCellValue('G'.($i+1), $mainArrayAnswer[$i-1][2])
 							      ->setCellValue('H'.($i+1), $mainArrayAnswer[$i-1][3])
-							      ->setCellValue('I'.($i+1), $mainArrayTrueAnswer[$i-1])
-								  ->setCellValue('J'.($i+1), $mainShuffleAnswers[$i-1]);
+								  ->setCellValue('I'.($i+1), $mainArrayAnswer[$i-1][4])
+							      ->setCellValue('J'.($i+1), $mainArrayTrueAnswer[$i-1])
+								  ->setCellValue('K'.($i+1), $mainShuffleAnswers[$i-1]);
 	}catch(Exception $e) {
 		echo 'Error in number of element...';
 		}								  
